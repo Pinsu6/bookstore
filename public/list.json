@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "storybook",
+    "title": "Adventures of Tom",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 2,
+    "name": "fairytale",
+    "title": "Magical Forest",
+    "price": 5,
+    "category": "budget",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 3,
+    "name": "novel",
+    "title": "Mystery of the Night",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 4,
+    "name": "storybook",
+    "title": "Journey to the West",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 5,
+    "name": "fantasy",
+    "title": "Dragon's Lair",
+    "price": 20,
+    "category": "standard",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 6,
+    "name": "storybook",
+    "title": "Space Odyssey",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 7,
+    "name": "novel",
+    "title": "The Lost City",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 8,
+    "name": "fantasy",
+    "title": "Realm of Shadows",
+    "price": 0,
+    "category": "Free",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 9,
+    "name": "novel",
+    "title": "Secrets of the Ocean",
+    "price": 40,
+    "category": "deluxe",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  },
+  {
+    "id": 10,
+    "name": "storybook",
+    "title": "Legend of the Phoenix",
+    "price": 50,
+    "category": "luxury",
+    "image": "https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books-illustration_23-2149341898.jpg?w=740&t=st=1716366923~exp=1716367523~hmac=19d797158e7add0288d88a8aeae8719f10691edd95951522f9ad3bac542af369"
+  }
+]
