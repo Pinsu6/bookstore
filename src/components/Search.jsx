@@ -4,12 +4,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Cards from "./Cards";
-function FreeBook() {
+
+function Search({ search }) {
   var settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 3,
     initialSlide: 0,
     responsive: [
@@ -41,43 +42,35 @@ function FreeBook() {
   };
 
   const [book, setBook] = useState([]);
+  console.log("data is ", search);
   useEffect(() => {
     const getBook = async () => {
       try {
         const response = await axios.get("http://localhost:4000/book/");
 
-        const data = response.data.filter((data) => data.category === "free");
+        const data = response.data.filter((data) => data.name === search);
         setBook(data);
       } catch (error) {
         console.log("error from course", error);
       }
     };
     getBook();
-  }, []);
+  }, [search]);
 
   return (
-    <>
-      <div className="max-w-screen-2xl  containern mx-auto md:px-20 px-4 ">
-        <div>
-          <h1 className="font-bold text-xl pb-2">Free course</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime
-            delectus eveniet amet perspiciatis quod libero ipsam facere
-            recusandae odio velit!
-          </p>
-        </div>
-        <div>
-          <div className="slider-container">
-            <Slider {...settings}>
-              {book.map((item) => (
-                <Cards items={item} key={item.id} />
-              ))}
-            </Slider>
-          </div>
-        </div>
+    <div
+      style={{ height: "100vh", background: "black" }}
+      className=" grid grid-cols-1 md:grid-cols-1"
+    >
+      <div className="slider-container ">
+        <Slider {...settings}>
+          {book.map((item) => (
+            <Cards items={item} key={item.id} />
+          ))}
+        </Slider>
       </div>
-    </>
+    </div>
   );
 }
 
-export default FreeBook;
+export default Search;

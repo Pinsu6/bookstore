@@ -20,7 +20,7 @@ function Contect() {
 
   return (
     <>
-      <dialog id="my_modal_3" className="modal" ref={modalRef}>
+      <dialog id="my_modal_8" className="modal" ref={modalRef}>
         <div className="modal-box">
           <form onSubmit={handleSubmit(onSubmit)} method="dialog">
             <button

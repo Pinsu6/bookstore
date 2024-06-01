@@ -1,12 +1,54 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, json } from "react-router-dom";
 import Login from "./Login";
 import Contect from "./Contect";
 import { useAuth } from "../context/AuthProvider";
 import Logout from "./Logout";
 
+import Search from "./Search";
+import Notification from "./Notification";
+import axios from "axios";
+
 function Navbar() {
+  const [search, setSearch] = useState();
   const [authUser, setAuthUser] = useAuth();
+  const notificationModalRef = useRef(null);
+  const contectRef = useRef(null);
+
+  const userDataString = localStorage.getItem("Users");
+  const userData = JSON.parse(userDataString);
+  const [book, setBook] = useState("");
+
+  const [bookname, setBookName] = useState("");
+  let bool = false;
+  if (userDataString != null) {
+    if (userData.email === "prince@gmail.com") {
+      bool = true;
+    }
+  }
+
+  const handlerNotification = async () => {
+    console.log("clicked");
+
+    try {
+      const response = await axios.get("http://localhost:4000/book/");
+      const books = response.data;
+
+      setBook(books);
+      const lastBook = books[books.length - 1];
+
+      console.log("Last book title:", lastBook.title);
+
+      setBookName(lastBook.title);
+      document.getElementById("my_modal_3").showModal();
+    } catch (error) {
+      console.error("Error fetching books:", error);
+    }
+  };
+
+  const handlerSearch = () => {
+    <Search search={search} />;
+  };
 
   const [sticky, setSticky] = useState(false);
   useEffect(() => {
@@ -31,13 +73,18 @@ function Navbar() {
         <Link to="/course">Books</Link>
       </li>
       <li>
-        <a onClick={() => document.getElementById("my_modal_3").showModal()}>
+        <a onClick={() => document.getElementById("my_modal_8").showModal()}>
           Contect
         </a>
       </li>
       <li>
         <a>About</a>
       </li>
+      {bool && (
+        <li>
+          <Link to="/admin">Admin</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -86,19 +133,23 @@ function Navbar() {
                 type="text"
                 className="grow outline-none bg-black"
                 placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-4 h-4 opacity-70"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <div onClick={handlerSearch}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="w-4 h-4 opacity-70 cursor-pointer"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
             </label>
           </div>
           <div>
@@ -111,6 +162,27 @@ function Navbar() {
               />
             </label>
           </div>
+          {authUser && (
+            <div className="relative ">
+              <svg
+                className="w-6 h-8 text-teal-600 cursor-pointer "
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 21 21"
+                onClick={handlerNotification}
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.585 15.5H5.415A1.65 1.65 0 0 1 4 13a10.526 10.526 0 0 0 1.5-5.415V6.5a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1.085c0 1.907.518 3.78 1.5 5.415a1.65 1.65 0 0 1-1.415 2.5zm1.915-11c-.267-.934-.6-1.6-1-2s-1.066-.733-2-1m-10.912 3c.209-.934.512-1.6.912-2s1.096-.733 2.088-1M13 17c-.667 1-1.5 1.5-2.5 1.5S8.667 18 8 17"
+                />
+              </svg>
+              <div className=" w-3 h-5 bg-teal-500 rounded-full text-center text-white text-sm absolute -top-2 -end-1">
+                <small>1</small>
+              </div>
+            </div>
+          )}
           {authUser ? (
             <Logout />
           ) : (
@@ -126,12 +198,13 @@ function Navbar() {
                 Login
               </a>
               <Login />
-              <Contect />
             </div>
           )}
-        
         </div>
       </div>
+      {search && <Search search={search} />}
+      <Contect />
+      <Notification Lastbook={bookname} />
     </div>
   );
 }

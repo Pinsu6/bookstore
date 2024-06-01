@@ -29,7 +29,7 @@ export const signUp = async (req, res) => {
         fullname: createdUser.fullname,
         email: createdUser.email,
       },
-    }); 
+    });
   } catch (error) {
     console.log("Error from user controller", error);
     res.status(500).json({ message: "Error from user controller" });
@@ -58,5 +58,15 @@ export const login = async (req, res) => {
   } catch (error) {
     console.log("error from login ", error);
     res.status(500).json({ message: "Error from user controller" });
+  }
+};
+
+export const user = async (req, res) => {
+  try {
+    const user = await User.find();
+    console.log(user);
+    res.status(200).json(user);
+  } catch (error) {
+    console.log("error from user controoler user function ", error);
   }
 };
