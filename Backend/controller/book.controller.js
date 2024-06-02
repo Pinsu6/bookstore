@@ -46,3 +46,24 @@ export const deleteBook = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const fetchOneBook = async (req, res) => {
+  const { _id } = req.params;
+
+  const bookData = await Book.findById({ _id });
+  res.status(200).json({ bookData });
+  
+};
+
+export const editBook = async (req, res) => {
+  const { _id } = req.params;
+  const { name, price, category, image, title } = req.body;
+  const editDetails = await Book.findByIdAndUpdate(_id, {
+    name,
+    price,
+    category,
+    image,
+    title,
+  });
+  res.status(200).json({ message: "Edited" });
+};

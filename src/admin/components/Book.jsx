@@ -1,10 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
+import Aside from "../Aside";
+import Edit from "./Edit";
+import { useEdit } from "../context/EditProvider";
 
 function Book() {
+  const [edit1, setEdit] = useEdit();
+  const [id, setId] = useState("6650439b66d81f0463522bd8");
   const [book, setBook] = useState([]);
   const [del, setDelete] = useState(false);
+  const [data, setData] = useState(false);
   useEffect(() => {
     const getBook = async () => {
       try {
@@ -15,20 +21,33 @@ function Book() {
         console.log("error from course", error);
       }
     };
+    setEdit(true);
     setDelete(false);
     getBook();
-  }, [del]);
+  }, [del, edit1]);
 
   const deleteBook = async (id) => {
     await axios.delete(`http://localhost:4000/book/delete/${id}`);
     setDelete(true);
   };
+  const getId = async (id) => {
+    setId(id);
+    if (data) {
+      setData(false);
+    } else {
+      setData(true);
+    }
+    document.getElementById("edit").showModal();
+  };
 
   return (
     <div>
       <Navbar />
+      <div className="mt-20">
+        <Aside />
+      </div>
       <div className="overflow-x-auto flex justify-center">
-        <table className="table mt-20 text-center w-[1000px] ">
+        <table className="table  text-center w-[1000px] ">
           <thead>
             <tr>
               <th></th>
@@ -77,7 +96,12 @@ function Book() {
                     </td>
 
                     <th>
-                      <button className="btn btn-ghost btn-xs">Edit</button>
+                      <button
+                        className="btn btn-ghost btn-xs"
+                        onClick={() => getId(item._id)}
+                      >
+                        Edit
+                      </button>
                     </th>
                     <th>
                       <button
@@ -93,6 +117,7 @@ function Book() {
             );
           })}
         </table>
+        <Edit id={id} getdata={data} />
       </div>
     </div>
   );
