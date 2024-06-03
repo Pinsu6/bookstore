@@ -1,5 +1,13 @@
 function Notification({ Lastbook }) {
   console.log("BOOK IS", Lastbook);
+  const renderBook = () => {
+    const bookElement = [];
+    for (let i = 0; i < Lastbook.length; i++) {
+      bookElement.push(<li key={i}>{Lastbook[i]}</li>);
+      <hr />;
+    }
+    return bookElement;
+  };
   return (
     <div>
       <dialog id="my_modal_3" className="modal">
@@ -9,8 +17,9 @@ function Notification({ Lastbook }) {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">New Book added {Lastbook}</p>
+          <h3 className="font-bold text-lg">Notifications</h3>
+         
+          {renderBook()}
         </div>
       </dialog>
     </div>

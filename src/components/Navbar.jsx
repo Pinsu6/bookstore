@@ -28,18 +28,17 @@ function Navbar() {
   }
 
   const handlerNotification = async () => {
-    console.log("clicked");
-
     try {
       const response = await axios.get("http://localhost:4000/book/");
       const books = response.data;
-
-      setBook(books);
+      if (bookname !== books.title) {
+        setBook(books);
+      }
       const lastBook = books[books.length - 1];
+      if (lastBook.title !== bookname) {
+        setBookName((prevBook) => [...prevBook, lastBook.title]);
+      }
 
-      console.log("Last book title:", lastBook.title);
-
-      setBookName(lastBook.title);
       document.getElementById("my_modal_3").showModal();
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -116,16 +115,18 @@ function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-5 shadow bg-base-100 rounded-box w-52"
             >
               {navItems}
             </ul>
           </div>
-          <a className=" text-2xl font-bold cursor-pointer">bookStore</a>
+          <a className=" text-2xl font-bold cursor-pointer lg:ms-[-22px] ">
+            bookStore
+          </a>
         </div>
         <div className="navbar-end space-x-3">
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{navItems}</ul>
+            <ul className="menu menu-horizontal px-5">{navItems}</ul>
           </div>
           <div className="hidden md:block">
             <label className=" px-3 py-2 border border-black rounded-full flex items-center  gap-2 bg-black">
@@ -165,7 +166,7 @@ function Navbar() {
           {authUser && (
             <div className="relative ">
               <svg
-                className="w-6 h-8 text-teal-600 cursor-pointer "
+                className="w-5 h-8 text-teal-600 cursor-pointer "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 21 21"
                 onClick={handlerNotification}
@@ -179,7 +180,7 @@ function Navbar() {
                 />
               </svg>
               <div className=" w-3 h-5 bg-teal-500 rounded-full text-center text-white text-sm absolute -top-2 -end-1">
-                <small>1</small>
+                <small>{bookname.length}</small>
               </div>
             </div>
           )}

@@ -8,6 +8,9 @@ import { useAuth } from "./context/AuthProvider";
 import Admin from "./admin/Admin";
 import Addbook from "./admin/components/Addbook";
 import Book from "./admin/components/Book";
+import Users from "./admin/components/Users";
+import SuggestBook from "./admin/components/SuggestBook";
+import Inbox from "./admin/components/Inbox";
 function App() {
   const [authUser] = useAuth();
   let bool = false;
@@ -30,6 +33,9 @@ function App() {
         <Route path="/admin" element={bool && <Admin />}></Route>
         <Route path="/addbook" element={bool && <Addbook />}></Route>
         <Route path="/book" element={bool && <Book />}></Route>
+        <Route path="/user" element={bool && <Users />}></Route>
+        <Route path="/suggestbook" element={bool && <SuggestBook />}></Route>
+        <Route path="/inbox" element={bool && <Inbox />}></Route>
 
         <Route path="/signup" element={<Signup />}></Route>
       </Routes>

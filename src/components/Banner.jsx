@@ -1,5 +1,20 @@
+import { useState } from "react";
 import banner from "../../public/2208.i305.025.F.m005.c9.realistic book lover.jpg";
+import axios from "axios";
+import toast from "react-hot-toast";
 function Banner() {
+  const [suggestbook, setSuggestBook] = useState("");
+  const suugest = async () => {
+    const info = {
+      bookName: suggestbook,
+    };
+    const res = await axios.post(
+      "http://localhost:4000/suggestbook/suggest/",
+      info
+    );
+    toast.success("Thankyou");
+    setSuggestBook("");
+  };
   return (
     <>
       <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 flex flex-col md:flex-row">
@@ -24,10 +39,19 @@ function Banner() {
                 <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
                 <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
               </svg>
-              <input type="text" className="grow" placeholder="Request For Book" />
+              <input
+                type="text"
+                className="grow"
+                placeholder="Request For Book"
+                value={suggestbook}
+                onChange={(e) => setSuggestBook(e.target.value)}
+              />
             </label>
           </div>
-          <button className="btn btn-secondary mt-6 text-white hover:bg-pink-500">
+          <button
+            className="btn btn-secondary mt-6 text-white hover:bg-pink-500"
+            onClick={suugest}
+          >
             Send Us
           </button>
         </div>

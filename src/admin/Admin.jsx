@@ -12,7 +12,7 @@ function Admin() {
 
   const getUser = async () => {
     const response = await axios.get("http://localhost:4000/user/getuser");
-    setUser(response.data.length);
+    setUser(response.data.user.length);
   };
 
   const getBook = async () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Book from "../model/book.model.js";
 
 export const getbook = async (req, res) => {

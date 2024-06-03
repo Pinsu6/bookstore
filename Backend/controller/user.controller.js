@@ -57,16 +57,33 @@ export const login = async (req, res) => {
     }
   } catch (error) {
     console.log("error from login ", error);
-    res.status(500).json({ message: "Error from user controller" });
+    res.status(500);
   }
 };
 
 export const user = async (req, res) => {
   try {
     const user = await User.find();
-    console.log(user);
-    res.status(200).json(user);
+
+    res.status(200).json({ user });
   } catch (error) {
-    console.log("error from user controoler user function ", error);
+    console.log("error from user controler user function ", error);
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+    const deletedUser = await User.findByIdAndDelete({ _id });
+
+    if (deletedUser) {
+      res.status(200).json({
+        message: "deleted",
+      });
+    }
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
