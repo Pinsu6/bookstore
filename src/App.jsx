@@ -11,6 +11,7 @@ import Book from "./admin/components/Book";
 import Users from "./admin/components/Users";
 import SuggestBook from "./admin/components/SuggestBook";
 import Inbox from "./admin/components/Inbox";
+import ShowPdf from "./components/ShowPdf";
 function App() {
   const [authUser] = useAuth();
   let bool = false;
@@ -29,6 +30,10 @@ function App() {
         <Route
           path="/course"
           element={authUser ? <Courses /> : <Navigate to="/signup" />}
+        ></Route>
+        <Route
+          path="/showpdf/:name"
+          element={authUser ? <ShowPdf /> : <Navigate to="/signup" />}
         ></Route>
         <Route path="/admin" element={bool && <Admin />}></Route>
         <Route path="/addbook" element={bool && <Addbook />}></Route>

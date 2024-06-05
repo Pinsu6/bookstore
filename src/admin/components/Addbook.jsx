@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Aside from "../Aside";
-import { useForm } from "react-hook-form";
+
 import axios from "axios";
-import toast, { ToastBar } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 function Addbook() {
   const [title, setTitle] = useState("");
@@ -11,6 +11,8 @@ function Addbook() {
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("0");
+  const [pdf, setPDF] = useState("");
+  const [file, setFile] = useState("");
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -31,8 +33,20 @@ function Addbook() {
         toast.error("Book Not Added");
       }
     });
+    submitImage();
   };
+  const submitImage = async () => {
+    const formData = new FormData();
+    formData.append("pdf", title);
+    formData.append("file", file);
 
+    const res = await axios.post("http://localhost:4000/pdf/pdfget", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(res);
+  };
   return (
     <>
       <Navbar />
@@ -89,7 +103,23 @@ function Addbook() {
                     />
                   </div>
                   <br />
+                  {/* pdf */}
+                  <form onSubmit={submitImage}>
+                    <div className="mt-4 space-y-2">
+                      <span>Pdf file</span>
+                      <br />
+                      <input
+                        type="file"
+                        placeholder="Enter Image url"
+                        className="w-80 px-3 border rounded-md outline-none py-1 "
+                        accept="application/pdf"
+                        onChange={(e) => setFile(e.target.files[0])}
+                      />
+                    </div>
+                    <br />
+                  </form>
 
+                  {/* pdf work end */}
                   <div className="mt-4 space-y-2">
                     <span>Category</span>
                     <br />

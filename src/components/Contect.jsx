@@ -43,22 +43,26 @@ function Contect() {
             >
               ✕
             </button>
-
-            <h3 className="font-bold text-lg flex justify-center m-2 py-2">
-              Contact Us!
-            </h3>
-            <hr />
-            <div className="space-y-3 mt-3">
-              <label className="text-md"> Your Email</label>
-              <br />
-              <input
-                type="email"
-                placeholder="Enter Your Email"
-                className="w-80 px-3 border rounded-md outline-none py-1"
-                value={user.email}
-              />
-            </div>
-            <br />
+            {user && (
+              <>
+                {" "}
+                <h3 className="font-bold text-lg flex justify-center m-2 py-2">
+                  Contact Us!
+                </h3>
+                <hr />
+                <div className="space-y-3 mt-3">
+                  <label className="text-md"> Your Email</label>
+                  <br />
+                  <input
+                    type="email"
+                    placeholder="Enter Your Email"
+                    className="w-80 px-3 border rounded-md outline-none py-1"
+                    value={user.email}
+                  />
+                </div>
+                <br />
+              </>
+            )}
 
             <div className="space-y-3 mt-3">
               <label className="text-md">

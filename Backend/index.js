@@ -6,6 +6,7 @@ import cors from "cors";
 import userRoute from "./routes/user.route.js";
 import suggestRoute from "./routes/suggest.route.js";
 import contectus from "./routes/contectus.route.js";
+import PDF from "./routes/pdf.route.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
@@ -24,6 +25,7 @@ app.use("/book", bookRoute);
 app.use("/user", userRoute);
 app.use("/suggestbook", suggestRoute);
 app.use("/contect", contectus);
+app.use("/pdf", PDF);
 app.listen(PORT, () => {
   console.log("server started");
 });

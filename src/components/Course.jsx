@@ -8,7 +8,7 @@ function Course() {
     const getBook = async () => {
       try {
         const response = await axios.get("http://localhost:4000/book/");
-        console.log(response.data);
+
         setBook(response.data);
       } catch (error) {
         console.log("error from course", error);

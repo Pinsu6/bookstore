@@ -1,5 +1,14 @@
+/* eslint-disable react/prop-types */
+
 import "../card.css";
+import { useNavigate } from "react-router-dom";
+
+// eslint-disable-next-line react/prop-types
 function Cards({ items }) {
+  const navigate = useNavigate();
+  const open = (bookname) => {
+    navigate(`/showpdf/:${bookname}`);
+  };
   return (
     <>
       <div className="mt-4 my-3 p-3">
@@ -19,8 +28,9 @@ function Cards({ items }) {
                 className=" px-2 py-1 bg-pink-500 text-white rounded-full border-[2px] hover:bg-pink-700
               hover:text-white  duration-200 cursor-pointer
               "
+                onClick={() => open(items.title)}
               >
-                Buy Now
+                Read Now
               </div>
             </div>
           </div>
