@@ -12,6 +12,7 @@ import Users from "./admin/components/Users";
 import SuggestBook from "./admin/components/SuggestBook";
 import Inbox from "./admin/components/Inbox";
 import ShowPdf from "./components/ShowPdf";
+import BuyNow from "./components/BuyNow";
 function App() {
   const [authUser] = useAuth();
   let bool = false;
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/showpdf/:name"
           element={authUser ? <ShowPdf /> : <Navigate to="/signup" />}
+        ></Route>
+        <Route
+          path="/buynow/:id"
+          element={authUser ? <BuyNow /> : <Navigate to="/signup" />}
         ></Route>
         <Route path="/admin" element={bool && <Admin />}></Route>
         <Route path="/addbook" element={bool && <Addbook />}></Route>

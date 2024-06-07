@@ -1,13 +1,6 @@
-function Notification({ Lastbook }) {
-  console.log("BOOK IS", Lastbook);
-  const renderBook = () => {
-    const bookElement = [];
-    for (let i = 0; i < Lastbook.length; i++) {
-      bookElement.push(<li key={i}>{Lastbook[i]}</li>);
-      <hr />;
-    }
-    return bookElement;
-  };
+import React from "react";
+
+function Notification({ newBooks }) {
   return (
     <div>
       <dialog id="my_modal_3" className="modal">
@@ -17,9 +10,24 @@ function Notification({ Lastbook }) {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Notifications</h3>
-         
-          {renderBook()}
+          <h3 className="font-bold text-lg text-center m-2">Notifications</h3>
+          <hr />
+
+          {newBooks.length > 0 ? (
+            <ul>
+              {newBooks.map((book, index) => (
+                <>
+                  <li className="m-2" key={index}>
+                    <p>New book added</p>
+                    {book.title}
+                  </li>
+                  <hr />
+                </>
+              ))}
+            </ul>
+          ) : (
+            <p>No new books available</p>
+          )}
         </div>
       </dialog>
     </div>

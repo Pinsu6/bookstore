@@ -6,8 +6,12 @@ import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 function Cards({ items }) {
   const navigate = useNavigate();
-  const open = (bookname) => {
-    navigate(`/showpdf/:${bookname}`);
+  const open = (bookname, category, id) => {
+    if (category === "free") {
+      navigate(`/showpdf/:${bookname}`);
+    } else {
+      navigate(`/buynow/:${id}`);
+    }
   };
   return (
     <>
@@ -19,7 +23,9 @@ function Cards({ items }) {
           <div className="card-body">
             <h2 className="card-title">
               {items.title}
-              <div className="badge badge-secondary">{items.name}</div>
+              <div className="badge badge-secondary text-white">
+                {items.name}
+              </div>
             </h2>
             <p>{items.category}</p>
             <div className="card-actions  justify-between  items-center">
@@ -28,9 +34,9 @@ function Cards({ items }) {
                 className=" px-2 py-1 bg-pink-500 text-white rounded-full border-[2px] hover:bg-pink-700
               hover:text-white  duration-200 cursor-pointer
               "
-                onClick={() => open(items.title)}
+                onClick={() => open(items.title, items.category, items._id)}
               >
-                Read Now
+                {items.category === "free" ? <p>Read Now</p> : <p>Buy Now</p>}
               </div>
             </div>
           </div>

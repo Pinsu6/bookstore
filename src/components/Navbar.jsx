@@ -17,7 +17,8 @@ function Navbar() {
 
   const userDataString = localStorage.getItem("Users");
   const userData = JSON.parse(userDataString);
-  const [book, setBook] = useState("");
+  const [newBooks, setNewBooks] = useState([]);
+  const [previousBookCount, setPreviousBookCount] = useState(0);
 
   const [bookname, setBookName] = useState("");
   let bool = false;
@@ -31,23 +32,29 @@ function Navbar() {
     try {
       const response = await axios.get("http://localhost:4000/book/");
       const books = response.data;
-      if (bookname !== books.title) {
-        setBook(books);
-      }
-      const lastBook = books[books.length - 1];
-      if (lastBook.title !== bookname) {
-        setBookName((prevBook) => [...prevBook, lastBook.title]);
-      }
 
-      document.getElementById("my_modal_3").showModal();
+      // Check if there are new books
+      if (books.length > previousBookCount) {
+        const newUploadedBooks = books.slice(previousBookCount);
+        setNewBooks(newUploadedBooks);
+        setPreviousBookCount(books.length);
+      }
     } catch (error) {
       console.error("Error fetching books:", error);
     }
   };
 
+  const showNotification = () => {
+    document.getElementById("my_modal_3").showModal();
+  };
+
   const handlerSearch = () => {
     <Search search={search} />;
   };
+
+  useEffect(() => {
+    handlerNotification();
+  }, [newBooks]);
 
   const [sticky, setSticky] = useState(false);
   useEffect(() => {
@@ -169,7 +176,7 @@ function Navbar() {
                 className="w-5 h-8 text-teal-600 cursor-pointer "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 21 21"
-                onClick={handlerNotification}
+                onClick={showNotification}
               >
                 <path
                   fill="none"
@@ -180,7 +187,7 @@ function Navbar() {
                 />
               </svg>
               <div className=" w-3 h-5 bg-teal-500 rounded-full text-center text-white text-sm absolute -top-2 -end-1">
-                <small>{bookname.length}</small>
+                <small>{newBooks.length}</small>
               </div>
             </div>
           )}
@@ -205,7 +212,7 @@ function Navbar() {
       </div>
       {search && <Search search={search} />}
       <Contect />
-      <Notification Lastbook={bookname} />
+      <Notification newBooks={newBooks} />
     </div>
   );
 }

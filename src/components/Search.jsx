@@ -42,14 +42,16 @@ function Search({ search }) {
   };
 
   const [book, setBook] = useState([]);
-  console.log("data is ", search);
+
   useEffect(() => {
     const getBook = async () => {
       try {
         const response = await axios.get("http://localhost:4000/book/");
-
-        const data = response.data.filter((data) => data.name === search);
+        const data = response.data.filter((data) =>
+          data.title.toLowerCase().includes(search.toLowerCase())
+        );
         setBook(data);
+        console.log(data);
       } catch (error) {
         console.log("error from course", error);
       }
