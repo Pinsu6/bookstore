@@ -21,7 +21,6 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) based Book Store applica
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
-- **Payment Gateway**: [Payment Gateway Name]
 
 ## Setup Instructions
 
