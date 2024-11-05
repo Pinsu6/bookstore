@@ -39,12 +39,8 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) based Book Store applica
     npm install
     ```
 
-3. Set up the environment variables. Create a `.env` file in the root of the project with the following details:
+3. Set up the environment variables. Create a `.env` file in the root of the project
 
-    ```
-    MONGO_URI=<your_mongodb_connection_string>
-    JWT_SECRET=<your_jwt_secret>
-    ```
 
 4. Run the server and client:
 
