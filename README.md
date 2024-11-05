@@ -27,7 +27,7 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) based Book Store applica
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/book-store.git
+    git clone https://github.com/pinsu6/book-store.git
     cd book-store
     ```
 
